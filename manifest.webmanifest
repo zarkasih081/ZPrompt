@@ -1,6 +1,6 @@
 {
-  "name": "Zarka Prompt Generator",
-  "short_name": "Zarka Prompt",
+  "name": "Zprompt",
+  "short_name": "Zprompt",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f5f3ee",
