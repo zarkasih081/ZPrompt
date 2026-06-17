@@ -1,4 +1,4 @@
-# Zarka Prompt Generator
+# Zprompt
 
 Website statis untuk membuat prompt desain AI secara cepat dan rapi.
 
@@ -7,7 +7,7 @@ Website statis untuk membuat prompt desain AI secara cepat dan rapi.
 - `index.html` halaman utama
 - `style.css` tampilan website
 - `script.js` logika generate prompt, copy, download TXT, mode gelap
-- `assets/logo.svg` logo Zarka
+- `assets/logo.svg` logo Zprompt
 - `assets/favicon.svg` favicon website
 - `manifest.webmanifest` konfigurasi PWA dasar
 
@@ -39,5 +39,5 @@ Website statis untuk membuat prompt desain AI secara cepat dan rapi.
 
 ## Brand
 
-Nama brand: Zarka
+Nama brand: Zprompt
 Konsep: brand digital kreatif untuk tools, desain, AI, dan project web sederhana.
