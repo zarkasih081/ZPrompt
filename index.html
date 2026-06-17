@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#10261f" />
+  <meta name="description" content="Zprompt adalah website sederhana untuk membuat prompt desain AI secara cepat, rapi, dan siap disalin." />
+  <title>Zprompt</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="site-header">
+      <nav class="nav" aria-label="Navigasi utama">
+        <a class="brand" href="#top" aria-label="Zprompt">
+          <img src="assets/logo.svg" alt="Logo Zprompt" />
+          <span>
+            <strong>Zprompt</strong>
+          </span>
+        </a>
+        <div class="nav-actions">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ganti tema"><span class="theme-icon">☀️</span></button>
+          <button class="nav-link" id="historyToggle" type="button" aria-label="Buka History">History</button>
+          <a class="nav-link" href="#generator">Buat Prompt</a>
+        </div>
+      </nav>
+
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow">AI Design Prompt Tool</p>
+          <h1>Buat prompt desain AI dengan cepat, rapi, dan siap pakai.</h1>
+          <p class="hero-text">Isi detail desain, klik generate, lalu salin prompt untuk ChatGPT, Canva AI, Ideogram, Leonardo, Bing Image Creator, atau tool AI lainnya.</p>
+          <div class="hero-buttons">
+            <a class="primary-btn" href="#generator">Mulai Buat Prompt</a>
+            <button class="secondary-btn" id="loadExample" type="button">Isi Contoh</button>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Preview hasil prompt">
+          <div class="card-topbar">
+            <span></span><span></span><span></span>
+          </div>
+          <h2>Zarka Studio</h2>
+          <p>Poster promosi modern untuk produk kreatif, warna sage dan emas, layout bersih, tipografi tegas, visual profesional.</p>
+          <div class="mini-grid">
+            <span>Poster</span>
+            <span>1:1</span>
+            <span>Modern</span>
+            <span>Full Color</span>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="quick-info" aria-label="Fitur website">
+        <article>
+          <strong>Form Lengkap</strong>
+          <p>Input ukuran, warna, teks, elemen visual, dan gaya desain.</p>
+        </article>
+        <article>
+          <strong>Prompt Otomatis</strong>
+          <p>Hasil prompt langsung tersusun rapi dalam satu klik.</p>
+        </article>
+        <article>
+          <strong>Siap Publish</strong>
+          <p>Bisa dipakai lokal, GitHub Pages, Netlify, atau hosting biasa.</p>
+        </article>
+      </section>
+
+      <section class="generator-section" id="generator">
+        <div class="section-heading">
+          <p class="eyebrow">Generator</p>
+          <h2>Form Prompt Desain</h2>
+          <p>Lengkapi bagian yang dibutuhkan. Bagian kosong akan dilewati otomatis.</p>
+        </div>
+
+        <div class="generator-left-column">
+          <div class="presets-container" aria-label="Template Cepat">
+            <button class="preset-btn" data-preset="ig-feed" type="button">Instagram Feed</button>
+            <button class="preset-btn" data-preset="yt-thumb" type="button">YouTube Thumbnail</button>
+            <button class="preset-btn" data-preset="logo" type="button">Logo</button>
+            <button class="preset-btn" data-preset="poster" type="button">Poster</button>
+            <button class="preset-btn" data-preset="story" type="button">Story</button>
+            <button class="preset-btn" data-preset="banner" type="button">Banner</button>
+            <button class="preset-btn" data-preset="ui" type="button">UI Website</button>
+            <button class="preset-btn" data-preset="slide" type="button">Presentasi Slide</button>
+          </div>
+
+          <form class="generator-form" id="promptForm">
+          <fieldset>
+            <legend>Informasi Desain</legend>
+            <div class="grid-2">
+              <label>Jenis Desain
+                <select id="designType">
+                  <option value="">Pilih jenis desain</option>
+                  <option>Logo</option>
+                  <option>Poster Promosi</option>
+                  <option>Feed Instagram</option>
+                  <option>Story Instagram</option>
+                  <option>Banner Website</option>
+                  <option>Label Produk</option>
+                  <option>Thumbnail YouTube</option>
+                  <option>Presentasi Slide</option>
+                  <option>UI Website</option>
+                </select>
+              </label>
+              <label>Target Platform
+                <select id="platform">
+                  <option value="">Pilih platform</option>
+                  <option>Canva AI</option>
+                  <option>ChatGPT Image</option>
+                  <option>Ideogram</option>
+                  <option>Leonardo AI</option>
+                  <option>Bing Image Creator</option>
+                  <option>Midjourney</option>
+                  <option>Umum</option>
+                </select>
+              </label>
+            </div>
+            <div id="platformTips" class="platform-tips" aria-hidden="true"></div>
+            <div class="grid-3">
+              <label>Lebar
+                <input id="width" type="number" min="1" placeholder="Contoh: 1080" />
+              </label>
+              <label>Tinggi
+                <input id="height" type="number" min="1" placeholder="Contoh: 1080" />
+              </label>
+              <label>Satuan
+                <select id="unit">
+                  <option>px</option>
+                  <option>cm</option>
+                  <option>mm</option>
+                  <option>inch</option>
+                </select>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Warna dan Gaya</legend>
+            <div class="grid-2">
+              <label>Warna Utama
+                <input id="primaryColor" type="text" placeholder="Contoh: hijau sage" />
+              </label>
+              <label>Warna Sekunder
+                <input id="secondaryColor" type="text" placeholder="Contoh: emas lembut" />
+              </label>
+            </div>
+            <div class="grid-2">
+              <label>Mood Warna
+                <select id="mood">
+                  <option value="">Pilih mood warna</option>
+                  <option>Fresh dan cerah</option>
+                  <option>Elegan dan profesional</option>
+                  <option>Minimalis dan bersih</option>
+                  <option>Hangat dan ramah</option>
+                  <option>Modern dan premium</option>
+                  <option>Lucu dan kartun</option>
+                </select>
+              </label>
+              <label>Gaya Desain
+                <select id="styleDesign">
+                  <option value="">Pilih gaya desain</option>
+                  <option>Modern clean</option>
+                  <option>Minimalis premium</option>
+                  <option>Kartun lucu</option>
+                  <option>Flat illustration</option>
+                  <option>3D soft style</option>
+                  <option>Luxury elegant</option>
+                  <option>Edukatif formal</option>
+                </select>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Teks dan Tipografi</legend>
+            <label>Teks Utama atau Judul Besar
+              <input id="mainText" type="text" placeholder="Contoh: Zarka Studio" />
+            </label>
+            <div class="grid-2">
+              <label>Peletakan Teks Utama
+                <select id="textPlacement">
+                  <option value="">Pilih peletakan</option>
+                  <option>Atas tengah</option>
+                  <option>Tengah utama</option>
+                  <option>Kiri atas</option>
+                  <option>Kiri bawah</option>
+                  <option>Kanan atas</option>
+                  <option>Bawah tengah</option>
+                </select>
+              </label>
+              <label>Gaya Font
+                <select id="fontStyle">
+                  <option value="">Pilih gaya font</option>
+                  <option>Sans serif modern</option>
+                  <option>Serif elegan</option>
+                  <option>Rounded friendly</option>
+                  <option>Bold display</option>
+                  <option>Handwritten playful</option>
+                  <option>Formal akademik</option>
+                </select>
+              </label>
+            </div>
+            <label>Teks Sekunder atau Tagline
+              <input id="tagline" type="text" placeholder="Contoh: Cepat, rapi, siap pakai" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Elemen Visual dan Gambar</legend>
+            <label>Deskripsi Gambar, Ilustrasi, atau Logo
+              <textarea id="visualDesc" rows="4" placeholder="Contoh: logo huruf Z modern dengan elemen cahaya lembut dan bentuk geometris"></textarea>
+            </label>
+            <div class="grid-2">
+              <label>Objek Utama
+                <input id="mainObject" type="text" placeholder="Contoh: karakter maskot, produk, ikon, cup" />
+              </label>
+              <label>Latar Belakang
+                <input id="background" type="text" placeholder="Contoh: putih bersih, gradasi lembut, transparan" />
+              </label>
+            </div>
+            <label>Elemen Tambahan
+              <input id="extraElements" type="text" placeholder="Contoh: daun, buah, sparkle, garis abstrak, bayangan halus" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Hasil Akhir</legend>
+            <div class="grid-2">
+              <label>Nuansa Output
+                <select id="outputTone">
+                  <option>Profesional</option>
+                  <option>Realistis</option>
+                  <option>Lucu</option>
+                  <option>Premium</option>
+                  <option>Akademik</option>
+                  <option>Promosi</option>
+                </select>
+              </label>
+              <label>Kualitas
+                <select id="quality">
+                  <option>High quality</option>
+                  <option>Ultra detailed</option>
+                  <option>Clean vector</option>
+                  <option>Print ready</option>
+                  <option>Mobile friendly</option>
+                </select>
+              </label>
+            </div>
+            <label>Catatan Khusus
+              <textarea id="notes" rows="3" placeholder="Contoh: jangan terlalu ramai, teks harus mudah dibaca, cocok untuk stiker"></textarea>
+            </label>
+          </fieldset>
+
+          <div class="form-actions">
+            <button class="primary-btn" type="submit">Generate Prompt</button>
+            <button class="secondary-btn" id="resetForm" type="button">Reset</button>
+            <span id="saveStatus" class="save-badge"></span>
+          </div>
+        </form>
+        </div>
+
+        <aside class="result-panel" aria-label="Hasil prompt">
+          <div class="result-header">
+            <div>
+              <p class="eyebrow">Output</p>
+              <h2>Hasil Prompt</h2>
+            </div>
+            <span id="charCount">0 karakter</span>
+          </div>
+          <textarea id="resultPrompt" rows="16" readonly placeholder="Hasil prompt akan muncul di sini..."></textarea>
+          <div class="result-actions">
+            <button class="primary-btn" id="copyPrompt" type="button">Copy Prompt</button>
+            <div class="export-group">
+              <select id="exportFormat" class="export-select" aria-label="Format Export">
+                <option value="txt">TXT</option>
+                <option value="json">JSON</option>
+                <option value="md">Markdown</option>
+                <option value="pdf">PDF</option>
+              </select>
+              <button class="secondary-btn" id="exportBtn" type="button">Download</button>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Zprompt. Dibuat untuk project digital kreatif.</p>
+      <a href="#top">Kembali ke atas</a>
+    </footer>
+  </div>
+  
+  <div class="history-sidebar" id="historySidebar" aria-hidden="true">
+    <div class="history-sidebar-header">
+      <div>
+        <h3>Prompt History</h3>
+        <button class="clear-all-btn" id="clearAllHistory" type="button" aria-label="Hapus semua history">Hapus Semua</button>
+      </div>
+      <button class="close-sidebar" id="closeHistory" type="button" aria-label="Tutup History">&times;</button>
+    </div>
+    <div class="history-sidebar-content">
+      <ul id="historyList" class="history-list"></ul>
+      <div id="historyEmpty" class="history-empty">
+        Belum ada history prompt.
+      </div>
+    </div>
+  </div>
+  <div class="history-overlay" id="historyOverlay" aria-hidden="true"></div>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
