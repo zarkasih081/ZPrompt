@@ -4,7 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#10261f" />
-  <meta name="description" content="Zprompt adalah website sederhana untuk membuat prompt desain AI secara cepat, rapi, dan siap disalin." />
+  <meta name="description" content="Zprompt — generator prompt desain AI gratis. Buat prompt untuk Canva AI, Midjourney, Ideogram, dan ChatGPT dalam hitungan detik." />
+  <meta property="og:title" content="Zprompt — AI Design Prompt Generator" />
+  <meta property="og:description" content="Buat prompt desain AI dengan cepat dan rapi." />
+  <meta property="og:url" content="https://zarkasih081.github.io/ZPrompt/" />
+  <meta property="og:type" content="website" />
   <title>Zprompt</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="manifest" href="manifest.webmanifest" />
@@ -31,7 +35,7 @@
         <div class="hero-copy">
           <p class="eyebrow">AI Design Prompt Tool</p>
           <h1>Buat prompt desain AI dengan cepat, rapi, dan siap pakai.</h1>
-          <p class="hero-text">Isi detail desain, klik generate, lalu salin prompt untuk ChatGPT, Canva AI, Ideogram, Leonardo, Bing Image Creator, atau tool AI lainnya.</p>
+          <p class="hero-text">Isi form, klik generate, langsung salin. Kompatibel dengan semua AI image tool populer.</p>
           <div class="hero-buttons">
             <a class="primary-btn" href="#generator">Mulai Buat Prompt</a>
             <button class="secondary-btn" id="loadExample" type="button">Isi Contoh</button>
@@ -41,8 +45,8 @@
           <div class="card-topbar">
             <span></span><span></span><span></span>
           </div>
-          <h2>Zarka Studio</h2>
-          <p>Poster promosi modern untuk produk kreatif, warna sage dan emas, layout bersih, tipografi tegas, visual profesional.</p>
+          <h2>Zprompt Preview</h2>
+          <p>Prompt poster minimalis modern, warna hijau sage dan emas, tipografi tegas, siap pakai di Canva AI.</p>
           <div class="mini-grid">
             <span>Poster</span>
             <span>1:1</span>
@@ -64,8 +68,8 @@
           <p>Hasil prompt langsung tersusun rapi dalam satu klik.</p>
         </article>
         <article>
-          <strong>Siap Publish</strong>
-          <p>Bisa dipakai lokal, GitHub Pages, Netlify, atau hosting biasa.</p>
+          <strong>Multi Platform</strong>
+          <p>Prompt siap pakai untuk Canva AI, Midjourney, Ideogram, ChatGPT, dan lainnya.</p>
         </article>
       </section>
 
@@ -93,7 +97,7 @@
             <legend>Informasi Desain</legend>
             <div class="grid-2">
               <label>Jenis Desain
-                <select id="designType">
+                <select id="designType" required>
                   <option value="">Pilih jenis desain</option>
                   <option>Logo</option>
                   <option>Poster Promosi</option>
@@ -107,7 +111,7 @@
                 </select>
               </label>
               <label>Target Platform
-                <select id="platform">
+                <select id="platform" required>
                   <option value="">Pilih platform</option>
                   <option>Canva AI</option>
                   <option>ChatGPT Image</option>
