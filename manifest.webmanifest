@@ -1,6 +1,6 @@
 {
-  "name": "Zprompt",
-  "short_name": "Zprompt",
+  "name": "ZPrompt",
+  "short_name": "ZPrompt",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f5f3ee",

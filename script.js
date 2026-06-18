@@ -184,7 +184,7 @@ function buildPrompt() {
   const size = width && height ? `${width} x ${height} ${unit}` : '';
 
   const lines = [];
-  lines.push('Buatkan desain visual berdasarkan brief berikut. Hasil harus rapi, mudah dibaca, dan terlihat profesional.');
+  lines.push('Buat desain visual sesuai brief berikut. Gunakan komposisi yang rapi, modern, mudah dibaca, dan siap digunakan.');
   addLine(lines, 'Jenis desain', vType);
   addLine(lines, 'Target platform', platform);
   addLine(lines, 'Ukuran desain', size);
@@ -204,8 +204,8 @@ function buildPrompt() {
   addLine(lines, 'Kualitas output', vQuality);
   addLine(lines, 'Catatan khusus', vNotes);
 
-  lines.push('Atur komposisi agar seimbang. Beri ruang kosong yang cukup. Jangan membuat desain terlalu ramai. Pastikan teks utama menjadi fokus dan tetap terbaca jelas.');
-  lines.push('Gunakan detail visual yang konsisten dengan brand Zprompt, yaitu modern, bersih, kreatif, dan mudah digunakan.');
+  lines.push('Gunakan komposisi seimbang, ruang kosong yang cukup, dan pastikan teks utama tetap menjadi fokus.');
+  lines.push('Jaga tampilan tetap modern, bersih, dan sesuai karakter ZPrompt.');
 
   return lines.join('\n');
 }
@@ -213,7 +213,7 @@ function buildPrompt() {
 function updateResult() {
   const prompt = buildPrompt();
   resultPrompt.value = prompt;
-  charCount.textContent = `${prompt.length} karakter`;
+  charCount.textContent = `${prompt.length} huruf`;
 }
 
 function saveFormToStorage() {
@@ -361,7 +361,7 @@ form.addEventListener('submit', (event) => {
   updateResult();
   saveToHistory();
   resultPrompt.focus();
-  showToast('Prompt berhasil dibuat!');
+  showToast('Prompt siap dipakai.');
 });
 
 Object.values(fields).forEach((field) => {
@@ -376,11 +376,11 @@ $('copyPrompt').addEventListener('click', async () => {
   saveToHistory();
   try {
     await navigator.clipboard.writeText(resultPrompt.value);
-    showToast('Prompt berhasil disalin!');
+    showToast('Prompt disalin.');
   } catch (error) {
     resultPrompt.select();
     document.execCommand('copy');
-    showToast('Prompt berhasil disalin!');
+    showToast('Prompt disalin.');
   }
 });
 
@@ -410,7 +410,7 @@ $('exportBtn').addEventListener('click', () => {
     mimeType = 'application/json;charset=utf-8';
   } else if (format === 'md') {
     content = [
-      '# Zprompt Design Brief',
+      '# ZPrompt Design Brief',
       '',
       `**Platform:** ${valueOf(fields.platform) || 'Umum'}`,
       `**Design Type:** ${valueOf(fields.designType) || '-'}`,
@@ -427,7 +427,7 @@ $('exportBtn').addEventListener('click', () => {
     printWin.document.write(`
       <html>
         <head>
-          <title>Zprompt - PDF Export</title>
+          <title>ZPrompt - PDF Export</title>
           <style>
             body { font-family: sans-serif; line-height: 1.6; color: #333; padding: 40px; }
             h1 { color: #153d33; }
@@ -436,7 +436,7 @@ $('exportBtn').addEventListener('click', () => {
           </style>
         </head>
         <body>
-          <h1>Zprompt Design Brief</h1>
+          <h1>ZPrompt Design Brief</h1>
           <div class="meta">
             <strong>Platform:</strong> ${valueOf(fields.platform) || 'Umum'}<br/>
             <strong>Type:</strong> ${valueOf(fields.designType) || '-'}<br/>
@@ -464,16 +464,16 @@ $('exportBtn').addEventListener('click', () => {
   link.click();
   link.remove();
   URL.revokeObjectURL(url);
-  showToast(`File ${format.toUpperCase()} berhasil diunduh.`);
+  showToast('File berhasil diunduh.');
 });
 
 $('resetForm').addEventListener('click', () => {
   form.reset();
   resultPrompt.value = '';
-  charCount.textContent = '0 karakter';
+  charCount.textContent = '0 huruf';
   try { localStorage.removeItem('zprompt_current_form'); } catch(e) {}
   updatePlatformTips();
-  showToast('Form telah dikosongkan.');
+  showToast('Form dikosongkan.');
 });
 
 $('loadExample').addEventListener('click', () => {
@@ -486,7 +486,7 @@ $('loadExample').addEventListener('click', () => {
   fields.secondaryColor.value = 'emas lembut';
   fields.mood.value = 'Modern dan premium';
   fields.styleDesign.value = 'Minimalis premium';
-  fields.mainText.value = 'Zprompt';
+  fields.mainText.value = 'ZPrompt';
   fields.textPlacement.value = 'Tengah utama';
   fields.fontStyle.value = 'Sans serif modern';
   fields.tagline.value = 'Cepat, rapi, siap pakai';

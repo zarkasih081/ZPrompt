@@ -4,13 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#10261f" />
-  <meta name="description" content="Zprompt — generator prompt desain AI gratis. Buat prompt untuk Canva AI, Midjourney, Ideogram, dan ChatGPT dalam hitungan detik." />
-  <meta property="og:title" content="Zprompt — AI Design Prompt Generator" />
+  <meta name="description" content="ZPrompt — generator prompt desain AI gratis. Buat prompt untuk Canva AI, Midjourney, Ideogram, dan ChatGPT dalam hitungan detik." />
+  <meta property="og:title" content="ZPrompt — AI Design Prompt Generator" />
   <meta property="og:description" content="Buat prompt desain AI dengan cepat dan rapi." />
   <meta property="og:url" content="https://zarkasih081.github.io/ZPrompt/" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://zarkasih081.github.io/ZPrompt/assets/og-image.png" />
-  <title>Zprompt</title>
+  <title>ZPrompt</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="assets/logo.png" />
   <link rel="manifest" href="manifest.webmanifest" />
@@ -20,40 +20,40 @@
   <div class="app-shell">
     <header class="site-header">
       <nav class="nav" aria-label="Navigasi utama">
-        <a class="brand" href="#top" aria-label="Zprompt">
-          <img src="assets/logo.png" alt="Logo Zprompt" />
+        <a class="brand" href="#top" aria-label="ZPrompt">
+          <img src="assets/logo.png" alt="Logo ZPrompt" />
           <span>
-            <strong>Zprompt</strong>
+            <strong>ZPrompt</strong>
           </span>
         </a>
         <div class="nav-actions">
           <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ganti tema"><span class="theme-icon">☀️</span></button>
-          <button class="nav-link" id="historyToggle" type="button" aria-label="Buka History">History</button>
-          <a class="nav-link" href="#generator">Buat Prompt</a>
+          <button class="nav-link" id="historyToggle" type="button" aria-label="Buka Riwayat">Riwayat</button>
+          <a class="nav-link" href="#generator">Buat</a>
         </div>
       </nav>
 
       <section class="hero" id="top">
         <div class="hero-copy">
-          <p class="eyebrow">AI Design Prompt Tool</p>
-          <h1>Buat prompt desain AI dengan cepat, rapi, dan siap pakai.</h1>
-          <p class="hero-text">Isi form, klik generate, langsung salin. Kompatibel dengan semua AI image tool populer.</p>
+          <p class="eyebrow">Prompt AI untuk desain</p>
+          <h1>Buat prompt desain dalam sekali klik.</h1>
+          <p class="hero-text">Pilih kebutuhan, isi detail, lalu salin hasilnya. Cocok untuk Canva AI, ChatGPT Image, Midjourney, Ideogram, dan tool visual lainnya.</p>
           <div class="hero-buttons">
-            <a class="primary-btn" href="#generator">Mulai Buat Prompt</a>
-            <button class="secondary-btn" id="loadExample" type="button">Isi Contoh</button>
+            <a class="primary-btn" href="#generator">Buat Sekarang</a>
+            <button class="secondary-btn" id="loadExample" type="button">Coba Contoh</button>
           </div>
         </div>
         <div class="hero-card" aria-label="Preview hasil prompt">
           <div class="card-topbar">
             <span></span><span></span><span></span>
           </div>
-          <h2>Zprompt Preview</h2>
-          <p>Prompt poster minimalis modern, warna hijau sage dan emas, tipografi tegas, siap pakai di Canva AI.</p>
+          <h2>Preview Prompt</h2>
+          <p>Logo modern untuk brand digital, warna hijau sage dan emas lembut, gaya clean, elegan, dan siap digunakan.</p>
           <div class="mini-grid">
-            <span>Poster</span>
+            <span>Logo</span>
             <span>1:1</span>
-            <span>Modern</span>
-            <span>Full Color</span>
+            <span>Clean</span>
+            <span>Siap Pakai</span>
           </div>
         </div>
       </section>
@@ -62,24 +62,24 @@
     <main>
       <section class="quick-info" aria-label="Fitur website">
         <article>
-          <strong>Form Lengkap</strong>
-          <p>Input ukuran, warna, teks, elemen visual, dan gaya desain.</p>
+          <strong>Template Cepat</strong>
+          <p>Pilih format populer seperti logo, poster, feed, story, banner, dan UI website.</p>
         </article>
         <article>
-          <strong>Prompt Otomatis</strong>
-          <p>Hasil prompt langsung tersusun rapi dalam satu klik.</p>
+          <strong>Hasil Tersusun</strong>
+          <p>Detail desain otomatis dirangkai jadi prompt yang jelas dan mudah dipakai.</p>
         </article>
         <article>
-          <strong>Multi Platform</strong>
-          <p>Prompt siap pakai untuk Canva AI, Midjourney, Ideogram, ChatGPT, dan lainnya.</p>
+          <strong>Fleksibel</strong>
+          <p>Cocok untuk berbagai AI visual, dari Canva AI sampai Midjourney.</p>
         </article>
       </section>
 
       <section class="generator-section" id="generator">
         <div class="section-heading">
           <p class="eyebrow">Generator</p>
-          <h2>Form Prompt Desain</h2>
-          <p>Lengkapi bagian yang dibutuhkan. Bagian kosong akan dilewati otomatis.</p>
+          <h2>Buat Prompt Desain</h2>
+          <p>Isi bagian penting saja. Kolom kosong akan dilewati otomatis.</p>
         </div>
 
         <div class="generator-left-column">
@@ -96,7 +96,7 @@
 
           <form class="generator-form" id="promptForm">
           <fieldset>
-            <legend>Informasi Desain</legend>
+            <legend>Detail Desain</legend>
             <div class="grid-2">
               <label>Jenis Desain
                 <select id="designType" required>
@@ -145,7 +145,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>Warna dan Gaya</legend>
+            <legend>Warna & Gaya</legend>
             <div class="grid-2">
               <label>Warna Utama
                 <input id="primaryColor" type="text" placeholder="Contoh: hijau sage" />
@@ -182,7 +182,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>Teks dan Tipografi</legend>
+            <legend>Teks</legend>
             <label>Teks Utama atau Judul Besar
               <input id="mainText" type="text" placeholder="Contoh: Zprompt" />
             </label>
@@ -216,7 +216,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>Elemen Visual dan Gambar</legend>
+            <legend>Visual</legend>
             <label>Deskripsi Gambar, Ilustrasi, atau Logo
               <textarea id="visualDesc" rows="4" placeholder="Contoh: logo huruf Z modern dengan elemen cahaya lembut dan bentuk geometris"></textarea>
             </label>
@@ -234,7 +234,7 @@
           </fieldset>
 
           <fieldset>
-            <legend>Hasil Akhir</legend>
+            <legend>Output</legend>
             <div class="grid-2">
               <label>Nuansa Output
                 <select id="outputTone">
@@ -262,8 +262,8 @@
           </fieldset>
 
           <div class="form-actions">
-            <button class="primary-btn" type="submit">Generate Prompt</button>
-            <button class="secondary-btn" id="resetForm" type="button">Reset</button>
+            <button class="primary-btn" type="submit">Buat Prompt</button>
+            <button class="secondary-btn" id="resetForm" type="button">Kosongkan</button>
             <span id="saveStatus" class="save-badge"></span>
           </div>
         </form>
@@ -273,13 +273,13 @@
           <div class="result-header">
             <div>
               <p class="eyebrow">Output</p>
-              <h2>Hasil Prompt</h2>
+              <h2>Prompt Jadi</h2>
             </div>
-            <span id="charCount">0 karakter</span>
+            <span id="charCount">0 huruf</span>
           </div>
-          <textarea id="resultPrompt" rows="16" readonly placeholder="Silakan isi form di sebelah kiri lalu klik 'Generate Prompt' untuk melihat hasilnya di sini."></textarea>
+          <textarea id="resultPrompt" rows="16" readonly placeholder="Silakan isi form di sebelah kiri lalu klik 'Buat Prompt' untuk melihat hasilnya di sini."></textarea>
           <div class="result-actions">
-            <button class="primary-btn" id="copyPrompt" type="button">Copy Prompt</button>
+            <button class="primary-btn" id="copyPrompt" type="button">Salin</button>
             <div class="export-group">
               <select id="exportFormat" class="export-select" aria-label="Format Export">
                 <option value="txt">TXT</option>
@@ -287,7 +287,7 @@
                 <option value="md">Markdown</option>
                 <option value="pdf">PDF</option>
               </select>
-              <button class="secondary-btn" id="exportBtn" type="button">Download</button>
+              <button class="secondary-btn" id="exportBtn" type="button">Unduh</button>
             </div>
           </div>
         </aside>
@@ -295,23 +295,23 @@
     </main>
 
     <footer class="site-footer">
-      <p>© <span id="year"></span> Zprompt. Dibuat untuk project digital kreatif.</p>
-      <a href="#top">Kembali ke atas</a>
+      <p>© <span id="year"></span> ZPrompt. Tool sederhana untuk membuat prompt desain lebih cepat.</p>
+      <a href="#top">Ke Atas</a>
     </footer>
   </div>
   
   <div class="history-sidebar" id="historySidebar" aria-hidden="true">
     <div class="history-sidebar-header">
       <div>
-        <h3>Prompt History</h3>
-        <button class="clear-all-btn" id="clearAllHistory" type="button" aria-label="Hapus semua history">Hapus Semua</button>
+        <h3>Riwayat Prompt</h3>
+        <button class="clear-all-btn" id="clearAllHistory" type="button" aria-label="Bersihkan riwayat">Bersihkan</button>
       </div>
-      <button class="close-sidebar" id="closeHistory" type="button" aria-label="Tutup History">&times;</button>
+      <button class="close-sidebar" id="closeHistory" type="button" aria-label="Tutup Riwayat">&times;</button>
     </div>
     <div class="history-sidebar-content">
       <ul id="historyList" class="history-list"></ul>
       <div id="historyEmpty" class="history-empty">
-        Belum ada history prompt.
+        Belum ada riwayat.
       </div>
     </div>
   </div>
