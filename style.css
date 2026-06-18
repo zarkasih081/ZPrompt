@@ -506,6 +506,16 @@ textarea:focus {
   padding-bottom: 12px;
   margin-bottom: 20px;
   scrollbar-width: thin;
+  position: relative;
+}
+
+.presets-container::after {
+  content: '';
+  position: sticky;
+  right: 0;
+  width: 40px;
+  background: linear-gradient(to right, transparent, var(--bg));
+  pointer-events: none;
 }
 
 .presets-container::-webkit-scrollbar {
