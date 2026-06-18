@@ -221,7 +221,11 @@ function saveFormToStorage() {
   Object.keys(fields).forEach(key => {
     formData[key] = fields[key].value;
   });
-  localStorage.setItem('zprompt_current_form', JSON.stringify(formData));
+  try {
+    localStorage.setItem('zprompt_current_form', JSON.stringify(formData));
+  } catch(e) {
+    console.warn('Storage disabled or full:', e);
+  }
   
   if (saveStatus) {
     saveStatus.innerHTML = '&#10003; Draft saved';
@@ -286,7 +290,11 @@ function saveToHistory() {
   history.unshift(newItem);
   if (history.length > 10) history.pop();
   
-  localStorage.setItem('zprompt_history', JSON.stringify(history));
+  try {
+    localStorage.setItem('zprompt_history', JSON.stringify(history));
+  } catch(e) {
+    console.warn('Storage disabled or full:', e);
+  }
   renderHistory();
 }
 
@@ -337,7 +345,9 @@ function renderHistory() {
     li.querySelector('.delete-history').addEventListener('click', (e) => {
       e.stopPropagation();
       const newHistory = history.filter(h => h.id !== item.id);
-      localStorage.setItem('zprompt_history', JSON.stringify(newHistory));
+      try {
+        localStorage.setItem('zprompt_history', JSON.stringify(newHistory));
+      } catch(e) {}
       renderHistory();
     });
     
@@ -461,7 +471,7 @@ $('resetForm').addEventListener('click', () => {
   form.reset();
   resultPrompt.value = '';
   charCount.textContent = '0 karakter';
-  localStorage.removeItem('zprompt_current_form');
+  try { localStorage.removeItem('zprompt_current_form'); } catch(e) {}
   updatePlatformTips();
   showToast('Form telah dikosongkan.');
 });
@@ -496,7 +506,7 @@ $('themeToggle').addEventListener('click', () => {
   const current = document.documentElement.dataset.theme;
   const next = current === 'dark' ? 'light' : 'dark';
   document.documentElement.dataset.theme = next;
-  localStorage.setItem('zarka-theme', next);
+  try { localStorage.setItem('zprompt-theme', next); } catch(e) {}
   updateThemeIcon();
 });
 
@@ -506,7 +516,8 @@ function updateThemeIcon() {
   icon.textContent = document.documentElement.dataset.theme === 'dark' ? '🌙' : '☀️';
 }
 
-const savedTheme = localStorage.getItem('zarka-theme');
+let savedTheme = null;
+try { savedTheme = localStorage.getItem('zprompt-theme'); } catch(e) {}
 if (savedTheme) document.documentElement.dataset.theme = savedTheme;
 updateThemeIcon();
 
@@ -536,7 +547,7 @@ $('closeHistory').addEventListener('click', toggleHistory);
 historyOverlay.addEventListener('click', toggleHistory);
 $('clearAllHistory').addEventListener('click', () => {
   if (confirm('Yakin ingin menghapus semua history?')) {
-    localStorage.removeItem('zprompt_history');
+    try { localStorage.removeItem('zprompt_history'); } catch(e) {}
     renderHistory();
   }
 });
