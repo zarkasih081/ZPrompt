@@ -231,12 +231,9 @@ function buildPrompt() {
     const ar = calculateAspectRatio(width, height);
     if (ar && ar.length < 10) prompt += ` --ar ${ar}`;
     
-    // Negative prompt: prefer dedicated field, fallback to notes
+    // Negative prompt: prefer dedicated field
     if (vNegative) {
       prompt += ` --no ${vNegative}`;
-    } else if (vNotes) {
-      const negative = vNotes.toLowerCase().replace('jangan ', '').replace('tanpa ', '');
-      prompt += ` --no ${negative}`;
     }
     return prompt;
   }
@@ -482,6 +479,13 @@ function clearResult() {
 
 function ensurePromptReady() {
   if (!form.checkValidity()) {
+    const invalidFields = form.querySelectorAll(':invalid');
+    if (invalidFields.length > 0) {
+      const fieldset = invalidFields[0].closest('fieldset');
+      if (fieldset && fieldset.classList.contains('is-collapsed')) {
+        setFormStepOpen(fieldset, true);
+      }
+    }
     form.reportValidity();
     showToast('Lengkapi jenis desain dan platform dulu.');
     return false;
@@ -528,7 +532,10 @@ function saveFormToStorage() {
 }
 
 function loadFormFromStorage() {
-  const saved = localStorage.getItem('zprompt_current_form');
+  let saved = null;
+  try {
+    saved = localStorage.getItem('zprompt_current_form');
+  } catch(e) {}
   if (saved) {
     try {
       const formData = JSON.parse(saved);

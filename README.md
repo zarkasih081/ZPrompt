@@ -45,6 +45,7 @@ Karena ini statis (Vanilla HTML/CSS/JS), bisa di-*host* di mana saja:
 Untuk upload ke hosting, cukup sertakan file-file ini saja (tanpa folder `.git`):
 ```
 index.html
+contoh.html
 style.css
 script.js
 sw.js
