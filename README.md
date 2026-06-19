@@ -7,9 +7,8 @@ Website statis untuk membuat prompt desain AI secara cepat dan rapi.
 - `style.css` tampilan website
 - `script.js` logika generate prompt, copy, download, mode gelap
 - `sw.js` service worker (offline support + caching)
-- `assets/logo.svg` logo utama ZPrompt (SVG transparan)
-- `assets/logo.png` logo fallback untuk PWA icon
-- `assets/favicon.svg` favicon website
+- `assets/logo.png` logo utama ZPrompt
+- `assets/favicon.png` favicon website
 - `manifest.webmanifest` konfigurasi PWA dasar
 
 ## Fitur
