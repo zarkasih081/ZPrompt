@@ -77,7 +77,7 @@ textarea {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 14px;
+  padding: 14px 14px 14px 24px; /* Increased left padding for logo balance */
   border: 1px solid var(--line);
   border-radius: 999px;
   background: rgba(255, 255, 255, .68);
@@ -192,7 +192,7 @@ p {
 
 h1 {
   font-size: clamp(2.4rem, 6vw, 5rem);
-  line-height: .98;
+  line-height: 1.2;
   letter-spacing: 0;
   margin-bottom: 20px;
 }
@@ -256,9 +256,9 @@ h1 {
 .hero-card::before {
   content: "";
   position: absolute;
-  inset: 24px 24px auto auto;
-  width: 170px;
-  height: 170px;
+  inset: 40px 32px auto auto;
+  width: 160px;
+  height: 160px;
   background: linear-gradient(135deg, var(--accent), transparent 70%);
   border-radius: 42px;
   transform: rotate(14deg);
@@ -304,9 +304,10 @@ h1 {
 .mini-grid span {
   background: var(--surface-soft);
   border: 1px solid var(--line);
-  padding: 12px;
-  border-radius: 12px;
+  padding: 6px 12px;
+  border-radius: 6px;
   font-weight: 700;
+  font-size: 0.9rem;
 }
 
 .quick-info {
@@ -644,9 +645,13 @@ textarea:focus {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  color: var(--muted);
+  color: rgba(16, 32, 24, 0.75);
   border-top: 1px solid var(--line);
   padding: 28px 0 40px;
+}
+
+[data-theme="dark"] .site-footer {
+  color: rgba(237, 245, 239, 0.75);
 }
 
 .site-footer p {
@@ -654,8 +659,15 @@ textarea:focus {
 }
 
 .site-footer a {
-  font-weight: 800;
+  font-weight: 600;
   color: var(--primary-2);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+  color: var(--primary);
 }
 
 .app-version {
@@ -675,7 +687,7 @@ textarea:focus {
   }
 
   body {
-    padding-bottom: 86px;
+    padding-bottom: 140px;
   }
 
   .nav {
@@ -746,6 +758,10 @@ textarea:focus {
   .mobile-sticky-actions .secondary-btn {
     padding: 12px 14px;
   }
+
+  .back-to-top {
+    bottom: 90px;
+  }
 }
 
 @media (max-width: 520px) {
@@ -755,6 +771,21 @@ textarea:focus {
 
   a.nav-link {
     display: none;
+  }
+
+  .history-text {
+    display: none;
+  }
+  
+  .history-icon {
+    display: block !important;
+  }
+  
+  #historyToggle {
+    padding: 12px; /* make it round like the theme toggle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .nav,
@@ -1305,6 +1336,7 @@ textarea:focus {
   border: 1px solid var(--line);
   padding: 24px;
   border-radius: var(--radius);
+  height: 100%;
 }
 .edu-card h3 { margin-bottom: 12px; font-size: 1.2rem; }
 
@@ -1321,3 +1353,84 @@ textarea:focus {
 }
 .brand-item:hover { border-color: var(--primary-2); }
 
+/* Brand Kit Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 20px;
+}
+
+.modal-overlay[aria-hidden="false"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: var(--surface);
+  width: 100%;
+  max-width: 600px;
+  border-radius: var(--radius);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-overlay[aria-hidden="false"] .modal-content {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Back to Top FAB */
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+  z-index: 40;
+  transition: all 0.2s ease;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+[data-theme="dark"] .back-to-top {
+  background: var(--surface-soft);
+}
+.back-to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.15);
+  background: var(--surface-soft);
+  color: var(--primary-2);
+}

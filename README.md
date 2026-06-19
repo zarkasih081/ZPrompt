@@ -3,13 +3,15 @@
 Website statis untuk membuat prompt desain AI secara cepat dan rapi.
 
 ## Struktur File
-- `index.html` halaman utama
+- `index.html` halaman utama generator prompt
+- `contoh.html` halaman prompt library
+- `about.html` halaman tentang
+- `support.html` halaman dukungan & saran
 - `style.css` tampilan website
-- `script.js` logika generate prompt, copy, download, mode gelap
-- `sw.js` service worker (offline support + caching)
-- `assets/logo.png` logo utama ZPrompt
-- `assets/favicon.png` favicon website
-- `manifest.webmanifest` konfigurasi PWA dasar
+- `script.js` logika utama
+- `sw.js` service worker (offline support)
+- `manifest.webmanifest` konfigurasi PWA
+- `assets/` logo dan icon
 
 ## Fitur
 1. **Form Input:** Jenis desain, gaya, warna, elemen visual, dll.
@@ -23,6 +25,14 @@ Website statis untuk membuat prompt desain AI secara cepat dan rapi.
 9. **Dark Mode:** Tema otomatis dan bisa diubah.
 10. **Riwayat Prompt:** Tersimpan di localStorage, bisa di-load ulang.
 11. **Offline Support:** Service worker dengan fallback offline page.
+12. **Mode Cepat:** Pembuatan prompt hanya dengan 3 input.
+13. **Skor Kualitas Prompt:** Penilaian kualitas prompt otomatis beserta saran.
+14. **Brand Kit:** Simpan warna, gaya, dan font brand Anda.
+15. **Prompt Library:** Halaman khusus berisi contoh dan template prompt.
+16. **Halaman Tentang:** Informasi seputar ZPrompt.
+17. **Dukungan & Saran:** Kirim masukan dan beri dukungan.
+18. **Install App:** ZPrompt bisa di-install sebagai Progressive Web App (PWA).
+19. **Privasi Lokal:** Data 100% aman dan hanya tersimpan di perangkat Anda.
 
 ## Platform Target yang Didukung
 - Midjourney (otomatis generate aspect ratio `--ar` dan negative prompt `--no`)

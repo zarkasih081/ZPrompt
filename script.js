@@ -854,9 +854,8 @@ function renderHistory() {
     deleteBtn.dataset.id = item.id;
     deleteBtn.title = 'Hapus';
     deleteBtn.innerHTML = `
-      <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2">
+        <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/>
       </svg>
     `;
 
@@ -1308,13 +1307,7 @@ function calculatePromptScore() {
 }
 
 // 3. Platform Copy
-function ensurePromptReady() {
-  if (!valueOf(fields.designType) || !valueOf(fields.platform)) {
-    showToast('Harap isi Jenis Desain dan Platform terlebih dahulu');
-    return false;
-  }
-  return true;
-}
+
 
 function copyForPlatform(platformName) {
   if (!ensurePromptReady()) return;
@@ -1432,3 +1425,15 @@ if ('serviceWorker' in navigator) {
     });
   });
 }
+
+// Back to Top functionality
+window.addEventListener('scroll', () => {
+  const btt = document.getElementById('backToTop');
+  if (btt) {
+    if (window.scrollY > 300) {
+      btt.classList.add('show');
+    } else {
+      btt.classList.remove('show');
+    }
+  }
+});
