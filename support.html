@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#10261f" />
+  <meta name="description" content="Dukung ZPrompt dengan donasi sukarela atau kirim saran untuk pengembangan fitur selanjutnya." />
+  <title>Dukungan & Saran — ZPrompt</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .support-content {
+      padding: 60px 0;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .support-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .support-subtitle {
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+    .support-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 768px) {
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .support-card {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .support-card h2 {
+      margin-bottom: 16px;
+      font-size: 1.4rem;
+    }
+    .support-card p {
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-size: 0.95rem;
+    }
+    .donation-methods {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .support-form label {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .support-form input,
+    .support-form select,
+    .support-form textarea {
+      width: 100%;
+      margin-top: 6px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--text);
+    }
+    .support-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="site-header" id="top">
+      <nav class="nav" aria-label="Navigasi utama">
+        <a class="brand" href="index.html" aria-label="ZPrompt">
+          <img src="assets/logo.png" alt="Logo ZPrompt" />
+          <span>
+            <strong>ZPrompt</strong>
+          </span>
+        </a>
+        <div class="nav-actions">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ganti tema"><span class="theme-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span></button>
+          <a class="nav-link" href="contoh.html">Prompt Library</a>
+          <a class="nav-link" href="index.html#generator">Generator</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main-content" style="padding: 0 20px;">
+      <section class="support-content">
+        <h1>Dukungan & Saran</h1>
+        <p class="support-subtitle">Bantu ZPrompt berkembang menjadi alat desain yang lebih baik untuk semua.</p>
+        
+        <div class="support-grid">
+          <!-- Donasi -->
+          <div class="support-card">
+            <h2>☕ Dukung Pengembangan</h2>
+            <p>ZPrompt dibuat untuk membantu pengguna membuat prompt desain dengan lebih cepat dan rapi. Jika website ini bermanfaat, kamu bisa memberi dukungan sukarela agar pengembangan fitur dan perbaikan website dapat terus berjalan secara gratis.</p>
+            <a href="#" class="primary-btn" style="text-decoration: none; display: inline-block; text-align: center; width: 100%;">Donasi Sekarang</a>
+            
+            <div style="margin-top: 24px;">
+              <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">METODE PEMBAYARAN:</span>
+              <div class="donation-methods">
+                <span class="version-tag" style="background: var(--line); color: var(--text);">QRIS</span>
+                <span class="version-tag" style="background: var(--line); color: var(--text);">Saweria</span>
+                <span class="version-tag" style="background: var(--line); color: var(--text);">Gopay</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Saran -->
+          <div class="support-card">
+            <h2>💡 Kirim Saran</h2>
+            <p>Punya ide fitur, menemukan bug, atau ingin memberi masukan? Kirim saran agar ZPrompt bisa terus diperbaiki sesuai kebutuhan pengguna.</p>
+            <form class="support-form" action="mailto:support@zprompt.example.com" method="post" enctype="text/plain">
+              <label>Nama (Opsional)
+                <input type="text" name="Nama" placeholder="Nama kamu" />
+              </label>
+              <label>Email (Opsional)
+                <input type="email" name="Email" placeholder="email@contoh.com" />
+              </label>
+              <label>Kategori
+                <select name="Kategori">
+                  <option value="Fitur baru">✨ Fitur baru</option>
+                  <option value="Bug atau error">🐛 Bug atau error</option>
+                  <option value="Tampilan UI/UX">🎨 Tampilan</option>
+                  <option value="Preset prompt">📝 Preset prompt</option>
+                  <option value="Lainnya">Lainnya</option>
+                </select>
+              </label>
+              <label>Isi Saran
+                <textarea name="Saran" required placeholder="Tulis masukan kamu di sini..."></textarea>
+              </label>
+              <button class="primary-btn" type="submit" style="width: 100%; margin-top: 12px;">Kirim Saran</button>
+            </form>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; width: 100%;">
+        <div>
+          <p>© <span id="year"></span> ZPrompt. Tool sederhana untuk membuat prompt desain lebih cepat.</p>
+          <p class="app-version">ZPrompt v1.5.0 • <a href="about.html" style="text-decoration: underline;">Tentang ZPrompt</a></p>
+        </div>
+        <div class="footer-actions" style="display: flex; align-items: center; gap: 16px;">
+          <a href="#top" style="font-weight: 700;">Ke Atas</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Theme setup
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('zprompt-theme'); } catch(e) {}
+    if (savedTheme) {
+      document.documentElement.dataset.theme = savedTheme;
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) metaTheme.setAttribute('content', savedTheme === 'dark' ? '#0d1411' : '#10261f');
+    }
+
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.dataset.theme === 'dark';
+        const newTheme = isDark ? 'light' : 'dark';
+        document.documentElement.dataset.theme = newTheme;
+        try { localStorage.setItem('zprompt-theme', newTheme); } catch(e) {}
+        const metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (metaTheme) metaTheme.setAttribute('content', newTheme === 'dark' ? '#0d1411' : '#10261f');
+      });
+    }
+  </script>
+</body>
+</html>
