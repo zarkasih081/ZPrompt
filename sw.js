@@ -1,8 +1,10 @@
-const CACHE_NAME = 'zprompt-cache-v1.4.0';
+const CACHE_NAME = 'zprompt-cache-v1.5.0';
 const APP_SHELL = [
   './',
   './index.html',
   './contoh.html',
+  './about.html',
+  './support.html',
   './style.css',
   './script.js',
   './manifest.webmanifest',
