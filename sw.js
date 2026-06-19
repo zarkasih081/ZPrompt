@@ -6,11 +6,11 @@ const APP_SHELL = [
   './style.css',
   './script.js',
   './manifest.webmanifest',
-  './assets/logo.svg',
+  './assets/logo.png',
   './assets/icon-192.png',
   './assets/icon-512.png',
   './assets/icon-maskable.png',
-  './assets/favicon.svg'
+  './assets/favicon.png'
 ];
 
 const OFFLINE_PAGE = `<!doctype html>
