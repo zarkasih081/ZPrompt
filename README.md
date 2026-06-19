@@ -46,6 +46,8 @@ Untuk upload ke hosting, cukup sertakan file-file ini saja (tanpa folder `.git`)
 ```
 index.html
 contoh.html
+about.html
+support.html
 style.css
 script.js
 sw.js

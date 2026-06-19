@@ -1309,6 +1309,7 @@ function calculatePromptScore() {
 
 // 3. Platform Copy
 function copyForPlatform(platformName) {
+  if (!ensurePromptReady()) return;
   const originalPlatform = valueOf(fields.platform);
   fields.platform.value = platformName;
   const tempPrompt = buildPrompt();
@@ -1347,6 +1348,9 @@ function renderBrands() {
       fields.styleDesign.value = brand.style || '';
       fields.outputTone.value = brand.tone || 'Profesional';
       fields.fontStyle.value = brand.font || '';
+      if (!fields.mainText.value.trim() && brand.name) {
+        fields.mainText.value = brand.name;
+      }
       updateResult(); saveFormToStorage(); updateFormStepStatuses();
       brandKitModal.setAttribute('aria-hidden', 'true');
       showToast(`Brand "${brand.name}" diterapkan`);
@@ -1364,6 +1368,9 @@ function renderBrands() {
 }
 $('openBrandKit')?.addEventListener('click', () => { brandKitModal.setAttribute('aria-hidden', 'false'); renderBrands(); });
 $('closeBrandKit')?.addEventListener('click', () => brandKitModal.setAttribute('aria-hidden', 'true'));
+brandKitModal?.addEventListener('click', (e) => {
+  if (e.target === brandKitModal) brandKitModal.setAttribute('aria-hidden', 'true');
+});
 $('cancelBrand')?.addEventListener('click', () => $('brandForm').reset());
 $('brandForm')?.addEventListener('submit', (e) => {
   e.preventDefault();
