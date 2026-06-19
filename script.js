@@ -9,6 +9,7 @@ const historyEmpty = $('historyEmpty');
 const platformTips = $('platformTips');
 const toastContainer = $('toastContainer');
 const resultEmptyState = $('resultEmptyState');
+const promptToolsPanel = $('promptToolsPanel');
 
 let activeOutputMode = 'prompt';
 let currentPromptText = '';
@@ -17,7 +18,7 @@ function showToast(message) {
   if (!toastContainer) return;
   const toast = document.createElement('div');
   toast.className = 'toast';
-  toast.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+  toast.innerHTML = '<svg class="toast-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
   const text = document.createElement('span');
   text.textContent = message;
   toast.appendChild(text);
@@ -32,7 +33,7 @@ function showToast(message) {
 }
 
 const ICONS = {
-  tip: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:text-bottom; margin-right:4px;"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>',
+  tip: '<svg class="icon-inline icon-sm" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>',
   sun: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
   moon: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
 };
@@ -684,17 +685,17 @@ function updateFormStepStatuses() {
 
     const missingRequired = meta.required.filter((key) => !valueOf(fields[key]));
     if (missingRequired.length > 0) {
-      status.textContent = `${missingRequired.length} wajib belum terisi`;
+      status.textContent = `${missingRequired.length} wajib`;
       return;
     }
 
     const filled = meta.track.filter((key) => valueOf(fields[key])).length;
     if (meta.required.length > 0) {
-      status.textContent = filled > 0 ? `Wajib lengkap, ${filled} detail terisi` : 'Wajib lengkap';
+      status.textContent = filled > 0 ? `Lengkap +${filled}` : 'Lengkap';
       return;
     }
 
-    status.textContent = filled > 0 ? `${filled} terisi` : meta.optionalLabel || 'Opsional';
+    status.textContent = filled > 0 ? `${filled} detail` : meta.optionalLabel || 'Opsional';
   });
 }
 
@@ -815,15 +816,15 @@ function renderHistory() {
   historyList.innerHTML = '';
   
   if (history.length === 0) {
-    historyList.style.display = 'none';
-    historyEmpty.style.display = 'block';
-    $('clearAllHistory').style.display = 'none';
+    historyList.hidden = true;
+    historyEmpty.hidden = false;
+    $('clearAllHistory').hidden = true;
     return;
   }
   
-  historyList.style.display = 'flex';
-  historyEmpty.style.display = 'none';
-  $('clearAllHistory').style.display = 'block';
+  historyList.hidden = false;
+  historyEmpty.hidden = true;
+  $('clearAllHistory').hidden = false;
   
   history.forEach(item => {
     const li = document.createElement('li');
@@ -854,9 +855,8 @@ function renderHistory() {
     deleteBtn.dataset.id = item.id;
     deleteBtn.title = 'Hapus';
     deleteBtn.innerHTML = `
-      <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2">
+        <path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/>
       </svg>
     `;
 
@@ -1265,8 +1265,12 @@ function calculatePromptScore() {
   const scorePanel = $('promptScorePanel');
   if (!scorePanel) return;
   if (!currentPromptText.trim()) {
-    scorePanel.style.display = 'none';
-    if ($('copyPlatformGroup')) $('copyPlatformGroup').style.display = 'none';
+    if (promptToolsPanel) {
+      promptToolsPanel.hidden = true;
+      promptToolsPanel.open = false;
+    }
+    scorePanel.hidden = true;
+    if ($('copyPlatformGroup')) $('copyPlatformGroup').hidden = true;
     return;
   }
   
@@ -1295,8 +1299,9 @@ function calculatePromptScore() {
     }
   }
   
-  scorePanel.style.display = 'block';
-  if ($('copyPlatformGroup')) $('copyPlatformGroup').style.display = 'block';
+  if (promptToolsPanel) promptToolsPanel.hidden = false;
+  scorePanel.hidden = false;
+  if ($('copyPlatformGroup')) $('copyPlatformGroup').hidden = false;
   if ($('scoreValue')) $('scoreValue').textContent = score;
   if ($('scoreFill')) {
     $('scoreFill').style.width = score + '%';
@@ -1308,13 +1313,7 @@ function calculatePromptScore() {
 }
 
 // 3. Platform Copy
-function ensurePromptReady() {
-  if (!valueOf(fields.designType) || !valueOf(fields.platform)) {
-    showToast('Harap isi Jenis Desain dan Platform terlebih dahulu');
-    return false;
-  }
-  return true;
-}
+
 
 function copyForPlatform(platformName) {
   if (!ensurePromptReady()) return;
@@ -1337,48 +1336,136 @@ $('copyChatGPT')?.addEventListener('click', () => copyForPlatform('ChatGPT Image
 
 // 4. Brand Kit
 const brandKitModal = $('brandKitModal');
+let lastFocusedBeforeBrandKit = null;
+
 function getBrands() {
   try { return JSON.parse(localStorage.getItem('zprompt_brands')) || []; } catch { return []; }
 }
+
+function isBrandKitOpen() {
+  return brandKitModal?.getAttribute('aria-hidden') === 'false';
+}
+
+function getBrandKitFocusableItems() {
+  if (!brandKitModal) return [];
+  return Array.from(brandKitModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'))
+    .filter((element) => !element.disabled && element.offsetParent !== null);
+}
+
+function openBrandKitModal() {
+  if (!brandKitModal || isBrandKitOpen()) return;
+  lastFocusedBeforeBrandKit = document.activeElement;
+  brandKitModal.setAttribute('aria-hidden', 'false');
+  renderBrands();
+  setTimeout(() => {
+    ($('brandName') || $('closeBrandKit') || brandKitModal.querySelector('.modal-content'))?.focus();
+  }, 0);
+}
+
+function closeBrandKitModal() {
+  if (!brandKitModal || !isBrandKitOpen()) return;
+  brandKitModal.setAttribute('aria-hidden', 'true');
+  $('brandForm')?.reset();
+
+  if (lastFocusedBeforeBrandKit && typeof lastFocusedBeforeBrandKit.focus === 'function') {
+    lastFocusedBeforeBrandKit.focus();
+  }
+}
+
+function handleBrandKitKeydown(event) {
+  if (!isBrandKitOpen()) return;
+
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    closeBrandKitModal();
+    return;
+  }
+
+  if (event.key !== 'Tab') return;
+
+  const focusableItems = getBrandKitFocusableItems();
+  if (focusableItems.length === 0) {
+    event.preventDefault();
+    brandKitModal.querySelector('.modal-content')?.focus();
+    return;
+  }
+
+  const firstItem = focusableItems[0];
+  const lastItem = focusableItems[focusableItems.length - 1];
+
+  if (event.shiftKey && document.activeElement === firstItem) {
+    event.preventDefault();
+    lastItem.focus();
+  } else if (!event.shiftKey && document.activeElement === lastItem) {
+    event.preventDefault();
+    firstItem.focus();
+  }
+}
+
+function applyBrand(brand) {
+  fields.primaryColor.value = brand.color1 || '';
+  fields.secondaryColor.value = brand.color2 || '';
+  fields.styleDesign.value = brand.style || '';
+  fields.outputTone.value = brand.tone || 'Profesional';
+  fields.fontStyle.value = brand.font || '';
+  if (!fields.mainText.value.trim() && brand.name) {
+    fields.mainText.value = brand.name;
+  }
+  updateResult();
+  saveFormToStorage();
+  updateFormStepStatuses();
+  closeBrandKitModal();
+  showToast(`Brand "${brand.name}" diterapkan`);
+}
+
 function renderBrands() {
   const brandList = $('brandList');
   if (!brandList) return;
   const brands = getBrands();
   brandList.innerHTML = '';
+
+  if (brands.length === 0) {
+    const empty = document.createElement('p');
+    empty.className = 'brand-list-empty';
+    empty.textContent = 'Belum ada brand tersimpan.';
+    brandList.appendChild(empty);
+    return;
+  }
+
   brands.forEach(brand => {
-    const btn = document.createElement('button');
-    btn.className = 'brand-item';
-    btn.type = 'button';
-    btn.textContent = brand.name;
-    btn.addEventListener('click', () => {
-      fields.primaryColor.value = brand.color1 || '';
-      fields.secondaryColor.value = brand.color2 || '';
-      fields.styleDesign.value = brand.style || '';
-      fields.outputTone.value = brand.tone || 'Profesional';
-      fields.fontStyle.value = brand.font || '';
-      if (!fields.mainText.value.trim() && brand.name) {
-        fields.mainText.value = brand.name;
-      }
-      updateResult(); saveFormToStorage(); updateFormStepStatuses();
-      brandKitModal.setAttribute('aria-hidden', 'true');
-      showToast(`Brand "${brand.name}" diterapkan`);
+    const item = document.createElement('div');
+    item.className = 'brand-item';
+
+    const applyBtn = document.createElement('button');
+    applyBtn.className = 'brand-item-main';
+    applyBtn.type = 'button';
+    applyBtn.textContent = brand.name || 'Brand tanpa nama';
+    applyBtn.addEventListener('click', () => {
+      applyBrand(brand);
     });
-    const delBtn = document.createElement('span');
-    delBtn.innerHTML = ' &times;'; delBtn.style.color = 'var(--muted)'; delBtn.style.paddingLeft = '6px';
+
+    const delBtn = document.createElement('button');
+    delBtn.className = 'brand-delete';
+    delBtn.type = 'button';
+    delBtn.setAttribute('aria-label', `Hapus brand ${brand.name || 'tanpa nama'}`);
+    delBtn.textContent = '×';
     delBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       localStorage.setItem('zprompt_brands', JSON.stringify(brands.filter(b => b.id !== brand.id)));
       renderBrands();
     });
-    btn.appendChild(delBtn);
-    brandList.appendChild(btn);
+
+    item.appendChild(applyBtn);
+    item.appendChild(delBtn);
+    brandList.appendChild(item);
   });
 }
-$('openBrandKit')?.addEventListener('click', () => { brandKitModal.setAttribute('aria-hidden', 'false'); renderBrands(); });
-$('closeBrandKit')?.addEventListener('click', () => brandKitModal.setAttribute('aria-hidden', 'true'));
+$('openBrandKit')?.addEventListener('click', openBrandKitModal);
+$('closeBrandKit')?.addEventListener('click', closeBrandKitModal);
 brandKitModal?.addEventListener('click', (e) => {
-  if (e.target === brandKitModal) brandKitModal.setAttribute('aria-hidden', 'true');
+  if (e.target === brandKitModal) closeBrandKitModal();
 });
+document.addEventListener('keydown', handleBrandKitKeydown);
 $('cancelBrand')?.addEventListener('click', () => $('brandForm').reset());
 $('brandForm')?.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -1395,13 +1482,13 @@ $('brandForm')?.addEventListener('submit', (e) => {
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault(); deferredPrompt = e;
-  if ($('installAppBtn')) $('installAppBtn').style.display = 'block';
+  if ($('installAppBtn')) $('installAppBtn').hidden = false;
 });
 $('installAppBtn')?.addEventListener('click', async () => {
   if (deferredPrompt) {
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
-    if (outcome === 'accepted') $('installAppBtn').style.display = 'none';
+    if (outcome === 'accepted') $('installAppBtn').hidden = true;
     deferredPrompt = null;
   }
 });
@@ -1428,7 +1515,19 @@ renderOutput();
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch(err => {
-      console.log('ServiceWorker registration failed: ', err);
+      console.warn('ServiceWorker registration failed: ', err);
     });
   });
 }
+
+// Back to Top functionality
+window.addEventListener('scroll', () => {
+  const btt = document.getElementById('backToTop');
+  if (btt) {
+    if (window.scrollY > 300) {
+      btt.classList.add('show');
+    } else {
+      btt.classList.remove('show');
+    }
+  }
+});

@@ -8,6 +8,7 @@
   <title>Dukungan & Saran — ZPrompt</title>
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="style.css" />
   <style>
     .support-content {
@@ -107,24 +108,24 @@
           <!-- Donasi -->
           <div class="support-card">
             <h2>☕ Dukung Pengembangan</h2>
-            <p>ZPrompt dibuat untuk membantu pengguna membuat prompt desain dengan lebih cepat dan rapi. Jika website ini bermanfaat, kamu bisa memberi dukungan sukarela agar pengembangan fitur dan perbaikan website dapat terus berjalan secara gratis.</p>
-            <a href="https://wa.me/6281234567890" target="_blank" class="primary-btn" style="text-decoration: none; display: inline-block; text-align: center; width: 100%;">Hubungi via WhatsApp</a>
+            <p>ZPrompt dibuat untuk membantu pengguna membuat prompt desain dengan lebih cepat, rapi, dan mudah digunakan. Jika ZPrompt bermanfaat, kamu bisa memberi dukungan sukarela untuk membantu pengembangan fitur, perbaikan tampilan, dan pemeliharaan website.</p>
             
-            <div style="margin-top: 24px;">
-              <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">METODE PEMBAYARAN:</span>
+            <div style="margin-top: 24px; margin-bottom: 16px;">
+              <span style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">METODE DONASI:</span>
               <div class="donation-methods">
-                <span class="version-tag" style="background: var(--line); color: var(--text);">QRIS</span>
-                <span class="version-tag" style="background: var(--line); color: var(--text);">Saweria</span>
-                <span class="version-tag" style="background: var(--line); color: var(--text);">Gopay</span>
+                <span class="version-tag" style="background: var(--line); color: var(--text);">DANA: 085161162787</span>
               </div>
             </div>
+
+            <button class="primary-btn" id="copyDanaBtn" style="width: 100%;">Salin Nomor DANA</button>
+            <p style="font-size: 0.85rem; margin-top: 12px; margin-bottom: 0;"><i>Catatan kecil: Donasi bersifat sukarela dan tidak wajib.</i></p>
           </div>
 
           <!-- Saran -->
           <div class="support-card">
-            <h2>💡 Kirim Saran</h2>
+            <h2 style="display: flex; align-items: center; gap: 8px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Kirim Saran</h2>
             <p>Punya ide fitur, menemukan bug, atau ingin memberi masukan? Kirim saran agar ZPrompt bisa terus diperbaiki sesuai kebutuhan pengguna.</p>
-            <p style="font-size: 0.85rem; margin-top: -16px; margin-bottom: 24px;">🔒 <i>Data saran hanya digunakan untuk pengembangan ZPrompt dan tidak ditampilkan ke publik.</i></p>
+            <p style="font-size: 0.85rem; margin-top: -16px; margin-bottom: 24px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: text-bottom; margin-right: 4px;"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> <i>Data saran hanya digunakan untuk pengembangan ZPrompt dan tidak ditampilkan ke publik.</i></p>
             <form class="support-form" action="mailto:zarkasih081@gmail.com" method="post" enctype="text/plain">
               <label>Nama (Opsional)
                 <input type="text" name="Nama" placeholder="Nama kamu" />
@@ -134,10 +135,10 @@
               </label>
               <label>Kategori
                 <select name="Kategori">
-                  <option value="Fitur baru">✨ Fitur baru</option>
-                  <option value="Bug atau error">🐛 Bug atau error</option>
-                  <option value="Tampilan UI/UX">🎨 Tampilan</option>
-                  <option value="Preset prompt">📝 Preset prompt</option>
+                  <option value="Fitur baru">Fitur baru</option>
+                  <option value="Bug atau error">Bug atau error</option>
+                  <option value="Tampilan UI/UX">Tampilan</option>
+                  <option value="Preset prompt">Preset prompt</option>
                   <option value="Lainnya">Lainnya</option>
                 </select>
               </label>
@@ -156,10 +157,9 @@
       <div class="footer-main" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; width: 100%;">
         <div>
           <p>© <span id="year"></span> ZPrompt. Tool sederhana untuk membuat prompt desain lebih cepat.</p>
-          <p class="app-version">ZPrompt v1.5.0 • <a href="about.html" style="text-decoration: underline;">Tentang ZPrompt</a></p>
+          <p class="app-version">ZPrompt v1.5.0 • <a href="about.html">Tentang ZPrompt</a></p>
         </div>
         <div class="footer-actions" style="display: flex; align-items: center; gap: 16px;">
-          <a href="#top" style="font-weight: 700;">Ke Atas</a>
         </div>
       </div>
     </footer>
@@ -168,6 +168,16 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     
+    function updateThemeIcon(theme) {
+      const icon = document.querySelector('.theme-icon');
+      if (!icon) return;
+      if (theme === 'dark') {
+        icon.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+      } else {
+        icon.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+      }
+    }
+
     // Theme setup
     let savedTheme = null;
     try { savedTheme = localStorage.getItem('zprompt-theme'); } catch(e) {}
@@ -175,6 +185,7 @@
       document.documentElement.dataset.theme = savedTheme;
       const metaTheme = document.querySelector('meta[name="theme-color"]');
       if (metaTheme) metaTheme.setAttribute('content', savedTheme === 'dark' ? '#0d1411' : '#10261f');
+      updateThemeIcon(savedTheme);
     }
 
     const themeToggle = document.getElementById('themeToggle');
@@ -186,8 +197,33 @@
         try { localStorage.setItem('zprompt-theme', newTheme); } catch(e) {}
         const metaTheme = document.querySelector('meta[name="theme-color"]');
         if (metaTheme) metaTheme.setAttribute('content', newTheme === 'dark' ? '#0d1411' : '#10261f');
+        updateThemeIcon(newTheme);
       });
     }
+
+    const copyDanaBtn = document.getElementById('copyDanaBtn');
+    if (copyDanaBtn) {
+      copyDanaBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText('085161162787');
+          const originalText = copyDanaBtn.innerText;
+          copyDanaBtn.innerText = 'Nomor DANA Tersalin!';
+          setTimeout(() => { copyDanaBtn.innerText = originalText; }, 2000);
+        } catch (err) {
+          alert('Gagal menyalin nomor.');
+        }
+      });
+    }
+
+    // Back to Top functionality
+    window.addEventListener('scroll', () => {
+      const btt = document.getElementById('backToTop');
+      if (btt) {
+        if (window.scrollY > 300) btt.classList.add('show');
+        else btt.classList.remove('show');
+      }
+    });
   </script>
+  <a href="#top" id="backToTop" class="back-to-top" aria-label="Ke Atas"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></a>
 </body>
 </html>

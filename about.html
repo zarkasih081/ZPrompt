@@ -8,6 +8,7 @@
   <title>Tentang ZPrompt</title>
   <link rel="icon" href="assets/favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
   <link rel="stylesheet" href="style.css" />
   <style>
     .about-content {
@@ -139,12 +140,11 @@
           <p>© <span id="year"></span> ZPrompt. Tool sederhana untuk membuat prompt desain lebih cepat.</p>
           <p class="app-version">
             ZPrompt v1.5.0 • 
-            <a href="about.html" style="text-decoration: underline;">Tentang</a> • 
-            <a href="support.html" style="text-decoration: underline;">Dukungan & Saran</a>
+            <a href="about.html">Tentang</a> • 
+            <a href="support.html">Dukungan & Saran</a>
           </p>
         </div>
         <div class="footer-actions" style="display: flex; align-items: center; gap: 16px;">
-          <a href="#top" style="font-weight: 700;">Ke Atas</a>
         </div>
       </div>
     </footer>
@@ -153,6 +153,16 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
     
+    function updateThemeIcon(theme) {
+      const icon = document.querySelector('.theme-icon');
+      if (!icon) return;
+      if (theme === 'dark') {
+        icon.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+      } else {
+        icon.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+      }
+    }
+
     // Theme setup
     let savedTheme = null;
     try { savedTheme = localStorage.getItem('zprompt-theme'); } catch(e) {}
@@ -160,6 +170,7 @@
       document.documentElement.dataset.theme = savedTheme;
       const metaTheme = document.querySelector('meta[name="theme-color"]');
       if (metaTheme) metaTheme.setAttribute('content', savedTheme === 'dark' ? '#0d1411' : '#10261f');
+      updateThemeIcon(savedTheme);
     }
 
     const themeToggle = document.getElementById('themeToggle');
@@ -171,8 +182,19 @@
         try { localStorage.setItem('zprompt-theme', newTheme); } catch(e) {}
         const metaTheme = document.querySelector('meta[name="theme-color"]');
         if (metaTheme) metaTheme.setAttribute('content', newTheme === 'dark' ? '#0d1411' : '#10261f');
+        updateThemeIcon(newTheme);
       });
     }
+
+    // Back to Top functionality
+    window.addEventListener('scroll', () => {
+      const btt = document.getElementById('backToTop');
+      if (btt) {
+        if (window.scrollY > 300) btt.classList.add('show');
+        else btt.classList.remove('show');
+      }
+    });
   </script>
+  <a href="#top" id="backToTop" class="back-to-top" aria-label="Ke Atas"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></a>
 </body>
 </html>
