@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#10261f" />
+  <meta name="description" content="Tentang ZPrompt - Tool generator prompt AI sederhana untuk membantu Anda membuat prompt desain yang lebih baik." />
+  <title>Tentang ZPrompt</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .about-content {
+      padding: 60px 0;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    .about-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .about-content h2 {
+      margin-top: 40px;
+      margin-bottom: 16px;
+      font-size: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+    }
+    .about-content p {
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .about-content ul {
+      margin-bottom: 24px;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    .about-content li {
+      margin-bottom: 8px;
+    }
+    .changelog-box {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: 24px;
+    }
+    .changelog-item {
+      margin-bottom: 16px;
+    }
+    .changelog-item:last-child {
+      margin-bottom: 0;
+    }
+    .version-tag {
+      background: var(--primary-2);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      margin-right: 8px;
+    }
+    [data-theme="dark"] .version-tag {
+      background: rgba(184, 149, 74, 0.2);
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="site-header" id="top">
+      <nav class="nav" aria-label="Navigasi utama">
+        <a class="brand" href="index.html" aria-label="ZPrompt">
+          <img src="assets/logo.png" alt="Logo ZPrompt" />
+          <span>
+            <strong>ZPrompt</strong>
+          </span>
+        </a>
+        <div class="nav-actions">
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ganti tema"><span class="theme-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span></button>
+          <a class="nav-link" href="contoh.html">Prompt Library</a>
+          <a class="nav-link" href="index.html#generator">Generator</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main-content" style="padding: 0 20px;">
+      <section class="about-content">
+        <h1>Tentang ZPrompt</h1>
+        
+        <p>ZPrompt adalah alat sederhana yang dibuat untuk membantu siapa saja—mulai dari pemula hingga desainer profesional—dalam menyusun <i>prompt</i> (perintah teks) yang efektif untuk AI pembuat gambar seperti Canva AI, Midjourney, Ideogram, dan ChatGPT Image.</p>
+        
+        <p>Seringkali, hasil AI tidak sesuai harapan karena prompt yang terlalu singkat atau ambigu. ZPrompt memecahkan masalah ini dengan menyediakan formulir terstruktur yang memandu Anda memasukkan elemen-elemen penting sebuah desain: jenis, warna, gaya, hingga <i>negative prompt</i> (hal yang ingin dihindari).</p>
+
+        <h2>Mengapa ZPrompt?</h2>
+        <ul>
+          <li><strong>Mudah Digunakan:</strong> Tersedia Mode Cepat untuk pemula dan form detail untuk tingkat lanjut.</li>
+          <li><strong>Aman & Privat:</strong> ZPrompt tidak memiliki server <i>backend</i>. Semua teks, riwayat, dan profil Brand Kit Anda disimpan 100% secara lokal di dalam browser (<i>localStorage</i>).</li>
+          <li><strong>Tanpa Iklan:</strong> Antarmuka yang bersih agar Anda bisa fokus berkreasi.</li>
+          <li><strong>Bisa Di-install:</strong> ZPrompt adalah Progressive Web App (PWA) yang bisa Anda <i>install</i> di HP atau laptop layaknya aplikasi biasa dan bisa diakses tanpa internet (offline).</li>
+        </ul>
+
+        <h2>Changelog</h2>
+        <div class="changelog-box">
+          <div class="changelog-item">
+            <strong><span class="version-tag">v1.5.0</span> (Terbaru)</strong>
+            <p style="margin-top: 8px;">Pembaruan Besar (UX & Fitur Pintar):</p>
+            <ul>
+              <li>Penambahan <strong>Mode Cepat</strong> (pembuatan prompt hanya dengan 3 input).</li>
+              <li>Penambahan <strong>Skor Kualitas Prompt</strong> otomatis dan saran perbaikan.</li>
+              <li>Fitur <strong>Brand Kit</strong> untuk menyimpan warna & gaya brand (menyimpan ke browser).</li>
+              <li>Tombol salin khusus per-platform.</li>
+              <li>Halaman <i>Contoh</i> dirombak menjadi <strong>Prompt Library</strong> dengan fitur cari, filter, dan "Gunakan Template".</li>
+              <li>Penambahan Preset khusus untuk mahasiswa dan UMKM (Stiker Cup, Poster Kampus, Proposal).</li>
+            </ul>
+          </div>
+          
+          <div class="changelog-item">
+            <strong><span class="version-tag">v1.4.0</span></strong>
+            <p style="margin-top: 8px;">Peningkatan UI & Kestabilan:</p>
+            <ul>
+              <li>Perbaikan Dark Mode dan kontras warna (Aksesibilitas).</li>
+              <li>Animasi <i>micro-interactions</i> pada tombol dan toast notification.</li>
+              <li>Pembaruan logo beresolusi tinggi (512x512 transparan).</li>
+              <li>Validasi form yang lebih pintar.</li>
+            </ul>
+          </div>
+        </div>
+
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-main" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; width: 100%;">
+        <div>
+          <p>© <span id="year"></span> ZPrompt. Tool sederhana untuk membuat prompt desain lebih cepat.</p>
+          <p class="app-version">ZPrompt v1.5.0</p>
+        </div>
+        <div class="footer-actions" style="display: flex; align-items: center; gap: 16px;">
+          <a href="#top" style="font-weight: 700;">Ke Atas</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    // Theme setup
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('zprompt-theme'); } catch(e) {}
+    if (savedTheme) {
+      document.documentElement.dataset.theme = savedTheme;
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) metaTheme.setAttribute('content', savedTheme === 'dark' ? '#0d1411' : '#10261f');
+    }
+
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.dataset.theme === 'dark';
+        const newTheme = isDark ? 'light' : 'dark';
+        document.documentElement.dataset.theme = newTheme;
+        try { localStorage.setItem('zprompt-theme', newTheme); } catch(e) {}
+        const metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (metaTheme) metaTheme.setAttribute('content', newTheme === 'dark' ? '#0d1411' : '#10261f');
+      });
+    }
+  </script>
+</body>
+</html>

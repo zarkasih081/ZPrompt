@@ -106,6 +106,19 @@ const presetsData = {
     designType: 'Presentasi Slide', platform: 'Canva AI', width: '1920', height: '1080', unit: 'px',
     mood: 'Modern dan premium', styleDesign: 'Luxury elegant', outputTone: 'Profesional', quality: 'High quality',
     visualDesc: 'presentasi bisnis profesional dengan data visual dan grafik modern'
+  },
+  'stiker-cup': {
+    designType: 'Label Produk', platform: 'Canva AI', width: '1000', height: '1000', unit: 'px',
+    mood: 'Fresh dan cerah', styleDesign: 'Kartun lucu', outputTone: 'Promosi', quality: 'Print ready',
+    negativePrompt: 'warna kusam, font susah dibaca'
+  },
+  'poster-kampus': {
+    designType: 'Poster Promosi', platform: 'Canva AI', width: '1080', height: '1350', unit: 'px',
+    mood: 'Elegan dan profesional', styleDesign: 'Edukatif formal', outputTone: 'Akademik', quality: 'High quality'
+  },
+  'proposal': {
+    designType: 'Presentasi Slide', platform: 'Canva AI', width: '1920', height: '1080', unit: 'px',
+    mood: 'Modern dan premium', styleDesign: 'Minimalis premium', outputTone: 'Profesional', quality: 'High quality'
   }
 };
 
@@ -459,6 +472,7 @@ function renderOutput() {
   charCount.textContent = `${text.length} huruf`;
   if (resultEmptyState) resultEmptyState.hidden = Boolean(currentPromptText.trim());
   updateOutputModeButtons();
+  if (typeof calculatePromptScore === 'function') calculatePromptScore();
 }
 
 function setOutputMode(mode) {
@@ -1218,6 +1232,179 @@ setupRequiredIndicators();
 setupFormSteps();
 loadFormFromStorage();
 updateFormStepStatuses();
+
+// v1.5.0 Additions
+
+// 1. Quick Mode
+const quickModeForm = $('quickModeForm');
+if (quickModeForm) {
+  quickModeForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    form.reset();
+    fields.designType.value = $('qmDesignType').value;
+    fields.mainText.value = $('qmMainText').value;
+    fields.styleDesign.value = $('qmStyle').value;
+    fields.platform.value = 'Umum';
+    fields.promptLang.value = 'Indonesia';
+    fields.detailLevel.value = 'Standar';
+    fields.outputTone.value = 'Profesional';
+    fields.quality.value = 'High quality';
+    
+    setOutputMode('prompt');
+    updateResult();
+    saveFormToStorage();
+    updatePlatformTips();
+    updateFormStepStatuses();
+    document.querySelector('#generator').scrollIntoView({ behavior: 'smooth' });
+    showToast('Prompt cepat berhasil dibuat!');
+  });
+}
+
+// 2. Prompt Score
+function calculatePromptScore() {
+  const scorePanel = $('promptScorePanel');
+  if (!scorePanel) return;
+  if (!currentPromptText.trim()) {
+    scorePanel.style.display = 'none';
+    if ($('copyPlatformGroup')) $('copyPlatformGroup').style.display = 'none';
+    return;
+  }
+  
+  let score = 0;
+  const good = [];
+  const bad = [];
+  
+  if (valueOf(fields.designType)) { score += 20; good.push('Jenis Desain'); } else bad.push('Jenis Desain belum diisi');
+  if (valueOf(fields.platform)) { score += 15; good.push('Platform'); } else bad.push('Platform belum diisi');
+  if (valueOf(fields.primaryColor) || valueOf(fields.secondaryColor)) { score += 15; good.push('Warna'); } else bad.push('Tambahkan warna agar hasil presisi');
+  if (valueOf(fields.width) && valueOf(fields.height)) { score += 15; good.push('Ukuran'); } else bad.push('Ukuran belum lengkap');
+  if (valueOf(fields.styleDesign)) { score += 10; good.push('Gaya Desain'); } else bad.push('Gaya desain belum diisi');
+  
+  const text = valueOf(fields.mainText);
+  if (text) {
+    if (text.length > 40) bad.push('Teks utama terlalu panjang (bisa terpotong)');
+    else { score += 15; good.push('Teks Utama'); }
+  }
+  
+  if (valueOf(fields.negativePrompt)) { score += 10; good.push('Negative Prompt'); } 
+  else { bad.push('Gunakan Negative Prompt'); }
+  
+  if (valueOf(fields.platform) === 'Midjourney' && valueOf(fields.designType) === 'Logo') {
+    if (valueOf(fields.width) !== valueOf(fields.height)) {
+      bad.push('Midjourney: Logo sebaiknya rasio 1:1');
+    }
+  }
+  
+  scorePanel.style.display = 'block';
+  if ($('copyPlatformGroup')) $('copyPlatformGroup').style.display = 'block';
+  if ($('scoreValue')) $('scoreValue').textContent = score;
+  if ($('scoreFill')) {
+    $('scoreFill').style.width = score + '%';
+    $('scoreFill').style.background = score >= 80 ? '#2e7d32' : score >= 50 ? '#f57f17' : '#c62828';
+  }
+  
+  if ($('scoreGoodText')) $('scoreGoodText').textContent = good.join(', ') || 'Belum ada';
+  if ($('scoreBadText')) $('scoreBadText').textContent = bad.join('. ') || 'Tidak ada (Sempurna!)';
+}
+
+// 3. Platform Copy
+function copyForPlatform(platformName) {
+  const originalPlatform = valueOf(fields.platform);
+  fields.platform.value = platformName;
+  const tempPrompt = buildPrompt();
+  fields.platform.value = originalPlatform;
+  
+  navigator.clipboard.writeText(tempPrompt).then(() => {
+    showToast(`Disalin untuk ${platformName}`);
+  }).catch(() => {
+    showToast('Gagal menyalin');
+  });
+}
+
+$('copyCanva')?.addEventListener('click', () => copyForPlatform('Canva AI'));
+$('copyMidjourney')?.addEventListener('click', () => copyForPlatform('Midjourney'));
+$('copyIdeogram')?.addEventListener('click', () => copyForPlatform('Ideogram'));
+$('copyChatGPT')?.addEventListener('click', () => copyForPlatform('ChatGPT Image'));
+
+// 4. Brand Kit
+const brandKitModal = $('brandKitModal');
+function getBrands() {
+  try { return JSON.parse(localStorage.getItem('zprompt_brands')) || []; } catch { return []; }
+}
+function renderBrands() {
+  const brandList = $('brandList');
+  if (!brandList) return;
+  const brands = getBrands();
+  brandList.innerHTML = '';
+  brands.forEach(brand => {
+    const btn = document.createElement('button');
+    btn.className = 'brand-item';
+    btn.type = 'button';
+    btn.textContent = brand.name;
+    btn.addEventListener('click', () => {
+      fields.primaryColor.value = brand.color1 || '';
+      fields.secondaryColor.value = brand.color2 || '';
+      fields.styleDesign.value = brand.style || '';
+      fields.outputTone.value = brand.tone || 'Profesional';
+      fields.fontStyle.value = brand.font || '';
+      updateResult(); saveFormToStorage(); updateFormStepStatuses();
+      brandKitModal.setAttribute('aria-hidden', 'true');
+      showToast(`Brand "${brand.name}" diterapkan`);
+    });
+    const delBtn = document.createElement('span');
+    delBtn.innerHTML = ' &times;'; delBtn.style.color = 'var(--muted)'; delBtn.style.paddingLeft = '6px';
+    delBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      localStorage.setItem('zprompt_brands', JSON.stringify(brands.filter(b => b.id !== brand.id)));
+      renderBrands();
+    });
+    btn.appendChild(delBtn);
+    brandList.appendChild(btn);
+  });
+}
+$('openBrandKit')?.addEventListener('click', () => { brandKitModal.setAttribute('aria-hidden', 'false'); renderBrands(); });
+$('closeBrandKit')?.addEventListener('click', () => brandKitModal.setAttribute('aria-hidden', 'true'));
+$('cancelBrand')?.addEventListener('click', () => $('brandForm').reset());
+$('brandForm')?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const brands = getBrands();
+  brands.push({
+    id: Date.now().toString(), name: $('brandName').value, color1: $('brandColor1').value, color2: $('brandColor2').value,
+    style: $('brandStyle').value, tone: $('brandTone').value, font: $('brandFont').value,
+  });
+  localStorage.setItem('zprompt_brands', JSON.stringify(brands));
+  renderBrands(); $('brandForm').reset(); showToast('Brand disimpan');
+});
+
+// 5. Install PWA
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault(); deferredPrompt = e;
+  if ($('installAppBtn')) $('installAppBtn').style.display = 'block';
+});
+$('installAppBtn')?.addEventListener('click', async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') $('installAppBtn').style.display = 'none';
+    deferredPrompt = null;
+  }
+});
+
+// 6. URL Preset (From Library)
+window.addEventListener('DOMContentLoaded', () => {
+  const presetId = new URLSearchParams(window.location.search).get('preset');
+  if (presetId && presetsData[presetId]) {
+    form.reset();
+    Object.keys(presetsData[presetId]).forEach(key => {
+      if (fields[key]) fields[key].value = presetsData[presetId][key];
+    });
+    setOutputMode('prompt'); updateResult(); saveFormToStorage();
+    updatePlatformTips(); updateFormStepStatuses();
+    window.history.replaceState({}, document.title, window.location.pathname);
+    document.querySelector('#generator').scrollIntoView({ behavior: 'smooth' });
+  }
+});
 renderHistory();
 updatePlatformTips();
 renderOutput();
