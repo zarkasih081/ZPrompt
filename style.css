@@ -31,7 +31,7 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -43,7 +43,7 @@ body {
     radial-gradient(circle at top right, rgba(39, 94, 79, .15), transparent 32%),
     var(--bg);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 img {
