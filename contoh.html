@@ -139,7 +139,11 @@
     // Theme setup
     let savedTheme = null;
     try { savedTheme = localStorage.getItem('zprompt-theme'); } catch(e) {}
-    if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+    if (savedTheme) {
+      document.documentElement.dataset.theme = savedTheme;
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) metaTheme.setAttribute('content', savedTheme === 'dark' ? '#0d1411' : '#10261f');
+    }
 
     // Copy function
     async function copyText(button) {

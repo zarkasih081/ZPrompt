@@ -1,4 +1,4 @@
-const CACHE_NAME = 'zprompt-cache-v9';
+const CACHE_NAME = 'zprompt-cache-v10';
 const APP_SHELL = [
   './',
   './index.html',

@@ -1103,7 +1103,15 @@ $('themeToggle').addEventListener('click', () => {
   document.documentElement.dataset.theme = next;
   try { localStorage.setItem('zprompt-theme', next); } catch(e) {}
   updateThemeIcon();
+  updateMetaThemeColor();
 });
+
+function updateMetaThemeColor() {
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) {
+    metaTheme.setAttribute('content', document.documentElement.dataset.theme === 'dark' ? '#0d1411' : '#10261f');
+  }
+}
 
 function updateThemeIcon() {
   const icon = document.querySelector('.theme-icon');
@@ -1115,6 +1123,7 @@ let savedTheme = null;
 try { savedTheme = localStorage.getItem('zprompt-theme'); } catch(e) {}
 if (savedTheme) document.documentElement.dataset.theme = savedTheme;
 updateThemeIcon();
+if (typeof updateMetaThemeColor === 'function') updateMetaThemeColor();
 
 $('year').textContent = new Date().getFullYear();
 
