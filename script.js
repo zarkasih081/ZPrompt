@@ -1308,6 +1308,14 @@ function calculatePromptScore() {
 }
 
 // 3. Platform Copy
+function ensurePromptReady() {
+  if (!valueOf(fields.designType) || !valueOf(fields.platform)) {
+    showToast('Harap isi Jenis Desain dan Platform terlebih dahulu');
+    return false;
+  }
+  return true;
+}
+
 function copyForPlatform(platformName) {
   if (!ensurePromptReady()) return;
   const originalPlatform = valueOf(fields.platform);
