@@ -1,7 +1,7 @@
 {
   "name": "ZPrompt",
   "short_name": "ZPrompt",
-  "start_url": "./index.html",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#f5f3ee",
   "theme_color": "#153d33",
