@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zarkasih081.github.io/ZPrompt/sitemap.xml

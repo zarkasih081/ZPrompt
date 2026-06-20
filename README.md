@@ -1,6 +1,17 @@
 # ZPrompt
 
-Website statis untuk membuat prompt desain AI secara cepat dan rapi.
+Website statis untuk membuat prompt desain AI secara cepat, rapi, dan siap dipakai di berbagai AI visual.
+
+Demo: [zarkasih081.github.io/ZPrompt](https://zarkasih081.github.io/ZPrompt/)
+
+## Ringkasan
+ZPrompt membantu pengguna menyusun prompt desain dengan formulir terstruktur, template siap pakai, Brand Kit lokal, riwayat prompt, dan export hasil. Semua data pengguna tersimpan di browser lewat `localStorage`, tanpa backend.
+
+## Halaman
+- [Beranda / Generator](https://zarkasih081.github.io/ZPrompt/)
+- [Template Prompt](https://zarkasih081.github.io/ZPrompt/template/)
+- [Tentang](https://zarkasih081.github.io/ZPrompt/tentang/)
+- [Dukungan & Saran](https://zarkasih081.github.io/ZPrompt/dukungan/)
 
 ## Struktur File
 - `index.html` halaman utama generator prompt
@@ -15,11 +26,12 @@ Website statis untuk membuat prompt desain AI secara cepat dan rapi.
 - `support.js` logika halaman dukungan
 - `sw.js` service worker (offline support)
 - `manifest.webmanifest` konfigurasi PWA
+- `robots.txt` dan `sitemap.xml` SEO dasar
 - `assets/` logo dan icon
 
 ## Fitur
 1. **Form Input:** Jenis desain, gaya, warna, elemen visual, dll.
-2. **Preset Cepat:** 13 template siap pakai (Feed IG, Story, Thumbnail YT, Logo Brand, Poster, Poster Makanan, Label Produk, Banner, Maskot, UI Website, UI Aplikasi, Presentasi Slide, Presentasi Bisnis).
+2. **Preset Cepat:** 13 template siap pakai di halaman generator.
 3. **Bahasa Output:** Indonesia, English, atau Campuran.
 4. **Level Detail:** Singkat, Standar, Detail, Sangat detail.
 5. **Negative Prompt:** Kolom khusus untuk hal yang harus dihindari.
@@ -32,11 +44,12 @@ Website statis untuk membuat prompt desain AI secara cepat dan rapi.
 12. **Mode Cepat:** Pembuatan prompt hanya dengan 3 input.
 13. **Skor Kualitas Prompt:** Penilaian kualitas prompt otomatis beserta saran.
 14. **Brand Kit:** Simpan warna, gaya, dan font brand Anda.
-15. **Prompt Library:** Halaman khusus berisi contoh dan template prompt.
+15. **Template Prompt:** 16 contoh prompt siap pakai dengan pencarian dan filter platform.
 16. **Halaman Tentang:** Informasi seputar ZPrompt.
-17. **Dukungan & Saran:** Kirim masukan dan beri dukungan.
+17. **Dukungan & Saran:** Kirim masukan via email atau GitHub Issue.
 18. **Install App:** ZPrompt bisa di-install sebagai Progressive Web App (PWA).
 19. **Privasi Lokal:** Data 100% aman dan hanya tersimpan di perangkat Anda.
+20. **SEO Dasar:** Canonical URL, Open Graph, `robots.txt`, dan `sitemap.xml`.
 
 ## Platform Target yang Didukung
 - Midjourney (otomatis generate aspect ratio `--ar` dan negative prompt `--no`)
@@ -79,9 +92,14 @@ library.js
 support.js
 sw.js
 manifest.webmanifest
+robots.txt
+sitemap.xml
 assets/
 LICENSE
 ```
+
+## Catatan Dukungan
+Form saran memakai `mailto:` agar tetap bekerja tanpa backend. Sebagai jalur tambahan, halaman dukungan menyediakan link GitHub Issue untuk laporan bug atau saran yang ingin dicatat publik.
 
 ## Brand
 
