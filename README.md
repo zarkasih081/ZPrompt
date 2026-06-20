@@ -4,11 +4,15 @@ Website statis untuk membuat prompt desain AI secara cepat dan rapi.
 
 ## Struktur File
 - `index.html` halaman utama generator prompt
-- `contoh.html` halaman prompt library
-- `about.html` halaman tentang
-- `support.html` halaman dukungan & saran
+- `template/index.html` halaman template prompt
+- `tentang/index.html` halaman tentang
+- `dukungan/index.html` halaman dukungan & saran
+- `contoh.html`, `about.html`, `support.html` pengalih untuk link lama
 - `style.css` tampilan website
 - `script.js` logika utama
+- `page.js` logika halaman statis
+- `library.js` logika template prompt
+- `support.js` logika halaman dukungan
 - `sw.js` service worker (offline support)
 - `manifest.webmanifest` konfigurasi PWA
 - `assets/` logo dan icon
@@ -43,7 +47,14 @@ Website statis untuk membuat prompt desain AI secara cepat dan rapi.
 - Bing Image Creator
 
 ## Local Development
-Cukup buka `index.html` di browser atau gunakan extension Live Server di VSCode.
+Gunakan server statis lokal agar rute bersih seperti `/template/`, `/tentang/`, dan `/dukungan/` berjalan konsisten.
+
+Contoh:
+```
+python -m http.server 8137
+```
+
+Lalu buka `http://127.0.0.1:8137/`.
 
 ## Deployment
 Karena ini statis (Vanilla HTML/CSS/JS), bisa di-*host* di mana saja:
@@ -55,11 +66,17 @@ Karena ini statis (Vanilla HTML/CSS/JS), bisa di-*host* di mana saja:
 Untuk upload ke hosting, cukup sertakan file-file ini saja (tanpa folder `.git`):
 ```
 index.html
+template/
+tentang/
+dukungan/
 contoh.html
 about.html
 support.html
 style.css
 script.js
+page.js
+library.js
+support.js
 sw.js
 manifest.webmanifest
 assets/

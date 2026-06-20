@@ -14,6 +14,19 @@ const promptToolsPanel = $('promptToolsPanel');
 let activeOutputMode = 'prompt';
 let currentPromptText = '';
 
+function getCleanHomePath() {
+  return window.location.pathname.replace(/index\.html$/i, '');
+}
+
+if (window.location.pathname.toLowerCase().endsWith('/index.html') && window.history?.replaceState) {
+  const shouldKeepSearch = new URLSearchParams(window.location.search).has('preset');
+  window.history.replaceState(
+    null,
+    document.title,
+    `${getCleanHomePath()}${shouldKeepSearch ? window.location.search : ''}${window.location.hash}`
+  );
+}
+
 function showToast(message) {
   if (!toastContainer) return;
   const toast = document.createElement('div');
@@ -1503,7 +1516,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     setOutputMode('prompt'); updateResult(); saveFormToStorage();
     updatePlatformTips(); updateFormStepStatuses();
-    window.history.replaceState({}, document.title, window.location.pathname);
+    window.history.replaceState({}, document.title, `${getCleanHomePath()}#generator`);
     document.querySelector('#generator').scrollIntoView({ behavior: 'smooth' });
   }
 });
