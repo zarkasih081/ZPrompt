@@ -1,4 +1,4 @@
-const CACHE_NAME = 'zprompt-cache-v1.6.2';
+const CACHE_NAME = 'zprompt-cache-v1.6.3';
 const APP_SHELL = [
   './',
   './index.html',
@@ -12,15 +12,17 @@ const APP_SHELL = [
   './about.html',
   './support.html',
   './style.css',
-  './style.css?v=1.6.2',
+  './style.css?v=1.6.3',
   './script.js',
-  './script.js?v=1.6.2',
+  './script.js?v=1.6.3',
   './page.js',
-  './page.js?v=1.6.2',
+  './page.js?v=1.6.3',
   './library.js',
-  './library.js?v=1.6.2',
+  './library.js?v=1.6.3',
   './support.js',
-  './support.js?v=1.6.2',
+  './support.js?v=1.6.3',
+  './robots.txt',
+  './sitemap.xml',
   './manifest.webmanifest',
   './assets/logo.png',
   './assets/icon-192.png',
